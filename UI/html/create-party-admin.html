@@ -14,16 +14,24 @@
     <div class="content">
         <div class="sidebar">
             <ul>
-                <li ><a href="./create-party-admin.html">Create a political party</a></li>
+                <li style="  background: #234a7e">Create a political party</li>
                 <li ><a href="./create-office-admin.html">Create a political office</a></li>
-                <li ><a href="./delete-edit.html">Edit or delete</a></li>
+                <li><a href="./delete-edit.html">Edit or delete</a></li>
                 <li><a href="./results.html">Results</a></li>
                 <li><a href="../index.html">Logout</a></li>
             </ul>
-            <p class="greet">Hello admin</p>
+            <p class="greet">Hello Admin</p>
         </div>
         <div class="subcontent">
-            <h3>Hello, what are your plans today?.</h3>
+            <h3>Create a political party!.</h3>
+            <div class="forms-create">
+                <form action="./admin-page.html">
+                  <input type="text" id="create" placeholder="Name of the political party" required>
+                  <input type="file" id="create" name="img" accept="image/*">
+                  <input type="submit" id="create" value="Create" required>
+                </form>
+                <div></div>
+              </div>
         </div>
     </div>
 </body>
