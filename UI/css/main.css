@@ -8,7 +8,7 @@ border: 0px;
 .body{
 margin: 0%;
 padding: 0%;
-background-image: url(../image/element5-digital-T9CXBZLUvic-unsplash.jpg);
+background-image: url(../images/element5-digital-T9CXBZLUvic-unsplash.jpg);
 background-size: cover;
 overflow: hidden;
 overflow-x: hidden;
@@ -120,6 +120,7 @@ p a{
 text-decoration: none;
 color: white;
 font-weight: bold;
+font-size: 15px;
 }
 .icon{
 width: 100%;
