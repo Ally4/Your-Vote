@@ -245,7 +245,7 @@ font-size: large;
 .votehere{
 margin-top: -10px;
 padding: 20px;
-background-color:green;
+background: #123250d0
 }
 .voteheredit p a{
 color: white;
@@ -265,7 +265,7 @@ background-color:rgb(91, 91, 245);
 .voteheredit .second{
 margin-top: -10px;
 padding: 20px;
-background-color:rgb(245, 81, 81);
+background: #123250d0;
 }
 .name, .office{
 background-color:rgb(82, 111, 192);
