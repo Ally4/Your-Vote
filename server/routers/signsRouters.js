@@ -1,8 +1,8 @@
 import express from 'express';
-import signupController from '../controllers/signupControllers';
+import signsController from '../controllers/signupSigninController';
 
 const signsRouters = express.Router();
 
-signsRouters.post('api/v1/auth/signup', signupController);
+signsRouters.post('/api/v1/auth/signup', signsController.signup);
 
 export default signsRouters;
