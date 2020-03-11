@@ -18,6 +18,11 @@
         "linebreak-style":"off",
         "no-console":"off",
         "newline-per-chained-call":"off",
-        "arrow-parens":"off"
+        "arrow-parens":"off",
+        "import/named":"off",
+        "no-undef":"off",
+        "no-debugger":"off",
+        "consistent-return":"off",
+        "object-curly-newline":"off"
     }
 }
