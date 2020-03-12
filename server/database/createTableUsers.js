@@ -16,15 +16,20 @@ const createtableusers = async () => {
           passporturl VARCHAR,
           isadmin VARCHAR DEFAULT 'false'
       )`;
+
+
   const party = `CREATE TABLE IF NOT EXISTS
         party (
+
             id serial primary key,
             name VARCHAR,
             hqaddress VARCHAR,
             logourl VARCHAR
         )`;
+
   const office = `CREATE TABLE IF NOT EXISTS
         office (
+
             id serial primary key,
             type VARCHAR,
             name VARCHAR
@@ -53,8 +58,10 @@ const createtableusers = async () => {
             body VARCHAR
         )`;
   await pool.query(users);
-  await pool.query(party);
-  await pool.query(office);
+
+  await pool.query(parties);
+  await pool.query(offices);
+
   await pool.query(candidate);
   await pool.query(vote);
   await pool.query(petition);
