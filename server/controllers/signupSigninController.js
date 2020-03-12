@@ -2,7 +2,11 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import pool from '../database/configuration';
+
 import { signupValidations, signinValidations } from '../validators/signupValidators';
+
+import { signupValidations } from '../validators/signupValidators';
+
 
 dotenv.config();
 
@@ -16,7 +20,11 @@ class signupSigninController {
         message: error.details[0].message.replace(/"/g, ''),
       });
     }
+
     if (!signup) {
+
+    if (signup.rows && signup.rows.length > 0) {
+
       return res.status(409).json({
         status: 409,
         message: 'The email you are trying to use is already in use',
@@ -26,12 +34,21 @@ class signupSigninController {
     const {
       firstname, lastname, othername, email, phonenumber, passporturl,
     } = req.body;
+
     await pool.query('INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl,) VALUES ($1, $2, $3, $4, $5, $6, $7)', [firstname, lastname, othername, email, password, phonenumber, passporturl]);
     const payload = { email, isadmin };
     const token = jwt.sign(payload, process.env.KEYWORD);
     return res.status(201).json({
       status: 201,
       message: 'user created successfully',
+
+    await pool.query('INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl) VALUES ($1, $2, $3, $4, $5, $6, $7)', [firstname, lastname, othername, email, password, phonenumber, passporturl]);
+    const payload = { email, firstname };
+    const token = jwt.sign(payload, process.env.KEYWORD);
+    return res.status(201).json({
+      status: 201,
+      message: 'User have been regidtered in the system successfully',
+
       data: {
         token,
       },
