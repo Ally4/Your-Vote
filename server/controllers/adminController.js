@@ -57,6 +57,23 @@ class adminJob {
     });
   }
 
+  static async createPetition(req, res) {
+    const { error } = petition.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        message: error.details[0].message.replace(/"/g, ''),
+      });
+    }
+    await pool.query('INSERT INTO petitions (createdby, office, body) VALUES ($1, $2, $3)', [req.body.createdby, req.body.office, req.body.body]);
+    return res.status(201).json({
+      status: 201,
+      data: {
+        message: 'The petition have been created',
+      },
+    });
+  }
+
   static async deletePoliticalParty(req, res) {
     const headersToken = req.headers.authorization;
     const verifying = jwt.verify(headersToken, process.env.KEYWORD);
