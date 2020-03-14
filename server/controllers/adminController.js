@@ -90,6 +90,22 @@ class adminJob {
     });
   }
 
+  static async getPartyById(req, res) {
+    const finding = await pool.query('SELECT * FROM parties WHERE id = $1', [req.params.partyid]);
+    if (!finding.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'The party is not yet in the system',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: {
+        party: finding.rows[0],
+      },
+    });
+  }
+
   static async deletePoliticalParty(req, res) {
     const headersToken = req.headers.authorization;
     const verifying = jwt.verify(headersToken, process.env.KEYWORD);
