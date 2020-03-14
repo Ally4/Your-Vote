@@ -4,7 +4,14 @@
   "description": "Help the citizens to vote their own leaders.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "nyc mocha --require @babel/register --timeout 1000000 --exit ./server/tests/*.js",
+    "create": "babel-node server/database/createTableUsers.js",
+    "delete": "babel-node server/database/deleteTables.js",
+    "insert": "babel-node server/database/insertdata.js"
+  },
+  "nyc": {
+    "exclude": "server/tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +42,12 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "nodemon": "^2.0.2"
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.5",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.0",
+    "pg": "^7.18.2",
+    "sendmail": "^1.6.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
