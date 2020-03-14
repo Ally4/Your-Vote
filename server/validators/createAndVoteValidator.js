@@ -12,20 +12,20 @@ const office = joi.object().keys({
 });
 
 const candidate = joi.object().keys({
-  office: joi.number().min(7).max(20).trim().required(),
-  party: joi.number().min(7).max(20).trim().required(),
-  candidate: joi.number().min(7).max(20).trim().required(),
+  office: joi.number().required(),
+  party: joi.number().required(),
+  candidate: joi.number().required(),
 });
 
 const vote = joi.object().keys({
-  createdby: joi.number().min(7).max(20).trim().required(),
-  office: joi.number().min(7).max(20).trim().required(),
-  candidate: joi.number().min(7).max(20).trim().required(),
+  createdby: joi.number().required(),
+  office: joi.number().required(),
+  candidate: joi.number().required(),
 });
 
 const petition = joi.object().keys({
-  createdby: joi.number().min(7).max(20).trim().required(),
-  office: joi.number().min(7).max(20).trim().required(),
+  createdby: joi.number().required(),
+  office: joi.number().required(),
   body: joi.string().min(7).max(20).trim().required(),
 });
 

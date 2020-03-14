@@ -5,8 +5,6 @@ import pool from '../database/configuration';
 
 import { signupValidations, signinValidations } from '../validators/signupValidators';
 
-import { signupValidations } from '../validators/signupValidators';
-
 
 dotenv.config();
 
@@ -21,8 +19,6 @@ class signupSigninController {
       });
     }
 
-    if (!signup) {
-
     if (signup.rows && signup.rows.length > 0) {
 
       return res.status(409).json({
@@ -34,13 +30,6 @@ class signupSigninController {
     const {
       firstname, lastname, othername, email, phonenumber, passporturl,
     } = req.body;
-
-    await pool.query('INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl,) VALUES ($1, $2, $3, $4, $5, $6, $7)', [firstname, lastname, othername, email, password, phonenumber, passporturl]);
-    const payload = { email, isadmin };
-    const token = jwt.sign(payload, process.env.KEYWORD);
-    return res.status(201).json({
-      status: 201,
-      message: 'user created successfully',
 
     await pool.query('INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl) VALUES ($1, $2, $3, $4, $5, $6, $7)', [firstname, lastname, othername, email, password, phonenumber, passporturl]);
     const payload = { email, firstname };
@@ -55,6 +44,7 @@ class signupSigninController {
     });
   }
 
+
   static async signin(req, res) {
     const signin = await pool.query('SELECT * FROM users WHERE email = $1', [req.body.email]);
     const { error } = signinValidations.validate(req.body);
@@ -67,14 +57,14 @@ class signupSigninController {
     if (signin.rows === 'undefined' || signin.rows.length === 0) {
       return res.status(404).json({
         status: 404,
-        message: 'The credentials are yet in the system',
+        message: 'The email you are trying to use in not in the system',
       });
     }
     const compare = bcrypt.compareSync(req.body.password, signin.rows[0].password);
     if (!compare) {
       return res.status(401).json({
         status: 401,
-        message: 'Check your credentials and try again',
+        message: 'The password you are using is not right',
       });
     }
     const payload = { email: signin.rows[0].email, isadmin: signin.rows[0].isadmin };
@@ -88,5 +78,6 @@ class signupSigninController {
     });
   }
 }
+
 
 export default signupSigninController;

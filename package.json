@@ -6,13 +6,13 @@
   "scripts": {
     "start": "nodemon app.js",
 
-    "test": "nyc mocha --exit --require @babel/register --timeout 1000000 ./server/tests/*.js",
-    "dev": "babel-node server/database/createTableUsers.js"
+    "test": "nyc mocha --require @babel/register --timeout 1000000 --exit ./server/tests/*.js",
+    "create": "babel-node server/database/createTableUsers.js",
+    "delete": "babel-node server/database/deleteTables.js",
+    "insert": "babel-node server/database/insertdata.js"
   },
   "nyc": {
     "exclude": "server/tests/*.js"
-
-    "dev": "babel-node server/database/createTableUsers.js"
 
   },
   "repository": {
@@ -54,10 +54,6 @@
     "nyc": "^15.0.0",
     "pg": "^7.18.2",
     "sendmail": "^1.6.1"
-
-    "nodemon": "^2.0.2",
-    "nyc": "^15.0.0",
-    "pg": "^7.18.2"
 
   },
   "devDependencies": {
