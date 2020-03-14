@@ -56,6 +56,30 @@ class adminJob {
       },
     });
   }
+
+  static async deletePoliticalParty(req, res) {
+    const headersToken = req.headers.authorization;
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    const finding = await pool.query('SELECT * FROM parties WHERE id = $1', [req.params.partyid]);
+    if (!finding.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'The political party you are trying to delete is not registered yet',
+      });
+    }
+
+    if (verifying.isadmin === false) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not allowed to proceed any further',
+      });
+    }
+    await pool.query('DELETE FROM parties WHERE id = $1', [req.params.partyid]);
+    res.status(200).json({
+      status: 200,
+      message: 'The party have been deleted',
+    });
+  }
 }
 
 export default adminJob;
