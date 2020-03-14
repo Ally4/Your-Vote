@@ -57,6 +57,39 @@ class adminJob {
     });
   }
 
+  static async createACandidate(req, res) {
+    const headersToken = req.headers.authorization;
+    const { error } = candidate.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        message: error.details[0].message.replace(/"/g, ''),
+      });
+    }
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    if (verifying.isadmin === false) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not the admin to proceed any further',
+      });
+    }
+
+    const campaign = await pool.query('SELECT * FROM candidates WHERE candidate = $1', [req.body.candidate]);
+    if (campaign) {
+      return res.status(409).json({
+        status: 409,
+        message: 'this candidate is running already for a given possition',
+      });
+    }
+    await pool.query('INSERT INTO candidates (office, party, candidate) VALUES ($1, $2, $3)', [req.body.office, req.body.party, req.body.candidate]);
+    return res.status(201).json({
+      status: 201,
+      data: {
+        message: 'The candidate have been created successfully',
+      },
+    });
+  }
+
   static async createPetition(req, res) {
     const { error } = petition.validate(req.body);
     if (error) {
