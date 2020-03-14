@@ -74,6 +74,22 @@ class adminJob {
     });
   }
 
+  static async getPoliticalParties(req, res) {
+    const politicalParties = await pool.query('SELECT * FROM parties');
+    if (!politicalParties.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'There is no party registered yet',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: {
+        parties: politicalParties.rows,
+      },
+    });
+  }
+
   static async deletePoliticalParty(req, res) {
     const headersToken = req.headers.authorization;
     const verifying = jwt.verify(headersToken, process.env.KEYWORD);
