@@ -20,7 +20,6 @@ class signupSigninController {
     }
 
     if (signup.rows && signup.rows.length > 0) {
-
       return res.status(409).json({
         status: 409,
         message: 'The email you are trying to use is already in use',
