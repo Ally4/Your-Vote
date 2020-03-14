@@ -90,6 +90,22 @@ class adminJob {
     });
   }
 
+  static async getPoliticalOffices(req, res) {
+    const politicalOffices = await pool.query('SELECT * FROM offices');
+    if (!politicalOffices.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'There is no office registered yet',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: {
+        offices: politicalOffices.rows,
+      },
+    });
+  }
+
   static async getPartyById(req, res) {
     const finding = await pool.query('SELECT * FROM parties WHERE id = $1', [req.params.partyid]);
     if (!finding.rows[0]) {
