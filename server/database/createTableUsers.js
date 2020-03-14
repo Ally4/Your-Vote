@@ -4,6 +4,7 @@ import pool from './configuration';
 dotenv.config();
 
 const createtableusers = async () => {
+
   const users = `CREATE TABLE IF NOT EXISTS 
     users (
         id serial primary key,
@@ -62,6 +63,7 @@ const createtableusers = async () => {
   console.log('The tables are created');
 
 }
+
 
 createtableusers();
 

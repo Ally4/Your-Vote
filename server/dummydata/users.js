@@ -13,6 +13,15 @@ const user = [
     lastname: 'mamalao',
     othername: 'maestro',
     email: 'maestro@gmail.com',
+    password: 'abcd1234',
+    phonenumber: '0784403223',
+    passporturl: 'www.passport.com',
+  },
+  {
+    firstname: 'babalao',
+    lastname: 'mamalao',
+    othername: 'maestro',
+    email: 'maestro@gmail.com',
     phonenumber: '0784403223',
     passporturl: 'www.passport.com',
   },
@@ -75,5 +84,4 @@ const user = [
     fakeToken: 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsbHlib21heWVlaHRAZ21haWwuY29tIiwiaXNhZG1pbiI6ImZhbHNlIiwiaWF0IjoxNTg0MDA2NTA3fQ.s5rpzz-9CZc0GBtI8KBhh6biUSlsPROSu0KokpnsQso',
   }
 ];
-
 export default user;

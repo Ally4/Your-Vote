@@ -9,7 +9,6 @@ const signupValidations = joi.object().keys({
   phonenumber: joi.string().min(7).max(20).trim().required(),
   passporturl: joi.string().min(7).max(20).trim().required(),
 });
-
 const signinValidations = joi.object().keys({
   email: joi.string().email().required(),
   password: joi.string().min(7).max(20).trim().required(),
