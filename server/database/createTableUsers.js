@@ -40,7 +40,7 @@ const createtableusers = async () => {
   const votes = `CREATE TABLE IF NOT EXISTS 
     votes (
         id serial primary key,
-        createdon TIME STAMP DEFAULT CURRENT_TIMESTAMP,
+        createdon TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         createdby INT,
         office INT,
         candidate INT
@@ -48,7 +48,7 @@ const createtableusers = async () => {
   const petitions = `CREATE TABLE IF NOT EXISTS 
     petitions (
         id serial primary key,
-        createdon TIME STAMP DEFAULT CURRENT_TIMESTAMP,
+        createdon TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         createdby INT,
         office INT,
         body VARCHAR

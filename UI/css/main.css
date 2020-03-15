@@ -30,7 +30,7 @@ margin-top: 100px;
 }
 h2, h3{
 text-align: center;
-color: #123250d0;
+color: white;
 }
 .navbar h2{
 text-align: start;
@@ -202,9 +202,10 @@ background: #000000;
 padding: 2px;
 box-sizing: border-box;
 border-radius: 6px;
+margin-left: 10px;
 }
 .percentage{
-background: #0fffb7;
+background: rgb(82, 111, 192);
 height: 10px;
 border-radius: 6px;
 }
