@@ -57,6 +57,38 @@ class adminJob {
     });
   }
 
+  static async editParty(req, res) {
+    const headersToken = req.headers.authorization;
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    if (verifying.isadmin === false) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not allow to change this status as you are not an admin',
+      });
+    }
+    const finding = await pool.query('SELECT * FROM parties WHERE id = $1', [req.params.partyid]);
+    if (!finding.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'The party is not in the system',
+      });
+    }
+    const { error } = party.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        message: error.details[0].message.replace(/"/g, ''),
+      });
+    }
+    await pool.query('UPDATE parties SET name = $1 , hqaddress = $2, logourl = $3 WHERE id = $4', [req.body.name, req.body.hqaddress, req.body.logourl, req.params.partyid]);
+    return res.status(200).json({
+      status: 200,
+      data: {
+        message: 'The party have been updated successfully',
+      },
+    });
+  }
+
   static async createACandidate(req, res) {
     const headersToken = req.headers.authorization;
     const { error } = candidate.validate(req.body);
