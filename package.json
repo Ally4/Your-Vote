@@ -4,7 +4,17 @@
   "description": "Help the citizens to vote their own leaders.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "create": "babel-node server/database/createTableUsers.js",
+    "delete": "babel-node server/database/deleteTables.js",
+    "insert": "babel-node server/database/insertdata.js",
+    "begin": "npm run delete && npm run create && npm run insert ",
+    "dev": "npm run begin && nodemon app.js ",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "npm run begin && nyc --reporter-html --report=text mocha --require @babel/register --timeout 10000000 --exit ./server/tests/*.js"
+    },
+  "nyc": {
+    "exclude": "server/tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -30,12 +40,20 @@
     "@hapi/joi": "^17.1.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^7.1.0",
     "moment": "^2.24.0",
-    "nodemon": "^2.0.2"
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.5",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.0",
+    "pg": "^7.18.2",
+    "sendmail": "^1.6.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
