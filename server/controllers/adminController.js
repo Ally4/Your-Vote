@@ -210,7 +210,7 @@ class adminJob {
     if (!finding.rows[0]) {
       return res.status(404).json({
         status: 404,
-        message: 'The political party you are trying to delete is not registered yet',
+        message: 'The political party you are trying to delete is not registered',
       });
     }
 
@@ -224,6 +224,30 @@ class adminJob {
     res.status(200).json({
       status: 200,
       message: 'The party have been deleted',
+    });
+  }
+
+  static async deletePoliticalOffice(req, res) {
+    const headersToken = req.headers.authorization;
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    const finding = await pool.query('SELECT * FROM offices WHERE id = $1', [req.params.officeid]);
+    if (!finding.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'The political office you are trying to delete is not registered',
+      });
+    }
+
+    if (verifying.isadmin === false) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not allowed to proceed any further as you are not the admin',
+      });
+    }
+    await pool.query('DELETE FROM offices WHERE id = $1', [req.params.officeid]);
+    res.status(200).json({
+      status: 200,
+      message: 'The office have been deleted',
     });
   }
 }
