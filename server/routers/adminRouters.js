@@ -26,4 +26,6 @@ adminRouters.delete('/api/v1/parties/:partyid', accessibility, adminJob.deletePo
 
 adminRouters.delete('/api/v1/offices/:officeid', accessibility, adminJob.deletePoliticalOffice);
 
+adminRouters.delete('/api/v1/petitions/:petitionid', accessibility, adminJob.deletePetition);
+
 export default adminRouters;

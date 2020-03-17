@@ -67,4 +67,17 @@ describe('The testing for the token', () => {
         done(error);
       });
   });
+  it('The admin should be able to delete a petition', (done) => {
+    reader()
+      .delete('/api/v1/petitions/1')
+      .set('Authorization', admin)
+      .end((error, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(200);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
 });

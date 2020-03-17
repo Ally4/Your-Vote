@@ -250,6 +250,30 @@ class adminJob {
       message: 'The office have been deleted',
     });
   }
+
+  static async deletePetition(req, res) {
+    const headersToken = req.headers.authorization;
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    const finding = await pool.query('SELECT * FROM petitions WHERE id = $1', [req.params.petitionid]);
+    if (!finding.rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        message: 'The petition you are trying to delete is not registered yet',
+      });
+    }
+
+    if (verifying.isadmin === false) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not allowed to proceed any further as you are not the admin',
+      });
+    }
+    await pool.query('DELETE FROM petitions WHERE id = $1', [req.params.petitionid]);
+    res.status(200).json({
+      status: 200,
+      message: 'The petition have been deleted',
+    });
+  }
 }
 
 export default adminJob;
