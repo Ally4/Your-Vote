@@ -6,6 +6,12 @@ const adminRouters = express.Router();
 
 adminRouters.patch('/api/v1/party/:partyid', accessibility, adminJob.editParty);
 
+adminRouters.post('/api/v1/vote', accessibility, adminJob.vote);
+
+adminRouters.get('/api/v1/office/:id/result', accessibility, adminJob.result);
+
+adminRouters.get('/api/v1/office/results', accessibility, adminJob.results);
+
 adminRouters.post('/api/v1/parties', accessibility, adminJob.createPoliticalParty);
 
 adminRouters.post('/api/v1/petitions', accessibility, adminJob.createPetition);

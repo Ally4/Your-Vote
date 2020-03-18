@@ -1,10 +1,12 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
+import chaiThings from 'chai-things';
 import app from '../../app';
 import users from '../dummydata/users';
 
 
 chai.use(chaiHttp);
+chai.use(chaiThings);
 const reader = () => chai.request(app);
 
 const user = {

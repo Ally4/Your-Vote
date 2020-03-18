@@ -4,6 +4,7 @@ cache:
   directories:
     - node_modules
 install : npm install
+install : travis_wait mvn install
 services:
   - postgresql
 before_script:

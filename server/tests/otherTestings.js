@@ -1,13 +1,16 @@
 import chai, { expect } from 'chai';
 import dotenv from 'dotenv';
 import chaiHttp from 'chai-http';
+import chaiThings from 'chai-things';
 import app from '../../app';
 import users from '../dummydata/users';
 
 dotenv.config();
 
 chai.use(chaiHttp);
+chai.use(chaiThings);
 const reader = () => chai.request(app);
+
 
 const admin = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsbWFlc3Ryb0BnbWFpbC5jb20iLCJpc2FkbWluIjoidHJ1ZSIsImlhdCI6MTU4NDAwODYyMn0.i-vD7TiplscSmaLeWv_rx8IjyrTv2plHUmtAMvn4Nwo';
 
