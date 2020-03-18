@@ -1,8 +1,5 @@
 language : node_js
 node_js : "stable"
-env :
-- KEYWORD=kjhdfkjhdfbnfddfkksdioufbrnbkjskhjsdjhks
-- DATABASE_URL=postgresql://postgres:ally@localhost:5432/yourvote 
 cache:
   directories:
     - node_modules
