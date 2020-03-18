@@ -4,7 +4,6 @@ import pool from './configuration';
 dotenv.config();
 
 const createtableusers = async () => {
-
   const users = `CREATE TABLE IF NOT EXISTS 
     users (
         id serial primary key,
@@ -39,11 +38,12 @@ const createtableusers = async () => {
         )`;
   const votes = `CREATE TABLE IF NOT EXISTS 
     votes (
-        id serial primary key,
+        id SERIAL,
         createdon TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         createdby INT,
         office INT,
-        candidate INT
+        candidate INT,
+        PRIMARY KEY (createdby, office)
         )`;
   const petitions = `CREATE TABLE IF NOT EXISTS 
     petitions (
@@ -61,8 +61,7 @@ const createtableusers = async () => {
   await pool.query(votes);
   await pool.query(petitions);
   console.log('The tables are created');
-
-}
+};
 
 
 createtableusers();
