@@ -12,7 +12,7 @@
     "dev": "npm run begin && nodemon app.js ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "npm run begin && nyc --reporter-html --report=text mocha --require @babel/register ./server/tests/*js --timeout 1000000000000 --exit"
-    },
+  },
   "nyc": {
     "exclude": "server/tests/*.js"
   },

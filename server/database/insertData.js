@@ -37,6 +37,11 @@ const insertData = async () => {
         party ,
         candidate
     ) VALUES ( 1, 1, 1)`;
+  const vote = `INSERT INTO votes (
+      createdby ,
+      office,
+      candidate
+  ) VALUES ( 1, 1, 1)`;
   const petition = `INSERT INTO petitions (
         createdby ,
         office ,
@@ -48,6 +53,7 @@ const insertData = async () => {
   await pool.query(party);
   await pool.query(office);
   await pool.query(candidate);
+  await pool.query(vote);
   await pool.query(petition);
   console.log('the insert was successfull');
 };

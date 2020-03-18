@@ -57,6 +57,42 @@ class adminJob {
     });
   }
 
+  static async vote(req, res) {
+    try{
+    const headersToken = req.headers.authorization;
+    const verifying = jwt.verify(headersToken, process.env.KEYWORD);
+    if (verifying.isadmin === true) {
+      return res.status(403).json({
+        status: 403,
+        message: 'You are not allow to vote, as you are the admin',
+      });
+    }
+    const { error } = vote.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        message: error.details[0].message.replace(/"/g, ''),
+      });
+    }
+    if (verifying.id !== req.body.createdby) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Put in your correct id as createdby',
+      });
+    }
+    await pool.query('INSERT INTO votes (createdby, office, candidate) VALUES ($1, $2, $3)', [req.body.createdby, req.body.office, req.body.candidate]);
+    return res.status(200).json({
+      status: 200,
+      message: 'The vote have been recorded',
+    });
+  } catch {
+    return res.status(409).json({
+      status: 409,
+      message: 'you are not allowed to vote for the office twice',
+    });
+  }
+}
+
   static async editParty(req, res) {
     const headersToken = req.headers.authorization;
     const verifying = jwt.verify(headersToken, process.env.KEYWORD);
