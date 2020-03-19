@@ -7,6 +7,13 @@ import { party, office, candidate, vote, petition } from '../validators/createAn
 dotenv.config();
 
 class adminJob {
+  static async welcomeMessage(req, res) {
+    return res.status(200).json({
+      status: 200,
+      message: 'WELCOME TO YOUR VOTE',
+    });
+  }
+  
   static async createPoliticalParty(req, res) {
     const headersToken = req.headers.authorization;
     const { error } = party.validate(req.body);

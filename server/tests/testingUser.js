@@ -19,6 +19,18 @@ const user = {
   passporturl: 'hgjhghjgfkjhfd',
 };
 describe('Testing the user', () => {
+  it('The user should be able to get the welcome message', (done) => {
+    reader()
+      .get('/')
+      .end((error, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(200);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
   it('User should not be able to signup with a missing field', (done) => {
     reader()
       .post('/api/v1/auth/signup')
