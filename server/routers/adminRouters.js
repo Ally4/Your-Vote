@@ -4,6 +4,8 @@ import accessibility from '../middleware/accessibility';
 
 const adminRouters = express.Router();
 
+adminRouters.get('/', adminJob.welcomeMessage);
+
 adminRouters.patch('/api/v1/party/:partyid', accessibility, adminJob.editParty);
 
 adminRouters.post('/api/v1/vote', accessibility, adminJob.vote);
