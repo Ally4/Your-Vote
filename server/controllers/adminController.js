@@ -93,6 +93,25 @@ class adminJob {
   }
 }
 
+static async result(req, res) {
+  const result = await pool.query(`SELECT office, candidate, CAST(COUNT(*)AS Int) AS result 
+  FROM votes WHERE office = $1 GROUP BY candidate, office`, [req.params.id]);
+  return res.status(200).json({
+    status: 200,
+    result: result.rows,
+  })
+}
+
+static async results(req, res) {
+  const results = await pool.query(`SELECT office, candidate, CAST(COUNT(*)AS Int) AS result 
+  FROM votes WHERE office = $1 GROUP BY candidate, office`, [req.params.id]);
+  return res.status(200).json({
+    status: 200,
+    results: results.rows,
+  })
+}
+
+
   static async editParty(req, res) {
     const headersToken = req.headers.authorization;
     const verifying = jwt.verify(headersToken, process.env.KEYWORD);
