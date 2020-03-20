@@ -55,8 +55,10 @@ dotenv.config();
         body VARCHAR
         )`;
 
-  const promises = [users, parties, offices, candidates, votes, petitions].map(async query => {
-    await pool.query(query);
-  });
-  await Promise.all(promises);
+  await pool.query(users);
+  await pool.query(parties);
+  await pool.query(offices);
+  await pool.query(candidates);
+  await pool.query(votes);
+  await pool.query(petitions);
 })();
