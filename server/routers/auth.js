@@ -1,5 +1,5 @@
 import express from 'express';
-import signsController from '../controllers/signupSigninController';
+import signsController from '../controllers/auth';
 
 const signsRouters = express.Router();
 

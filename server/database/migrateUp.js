@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
-import pool from './configuration';
+import pool from './config';
 
 dotenv.config();
 
-const createtableusers = async () => {
+(async () => {
   const users = `CREATE TABLE IF NOT EXISTS 
     users (
         id serial primary key,
@@ -14,12 +14,12 @@ const createtableusers = async () => {
         password VARCHAR,
         phonenumber INT,
         passporturl VARCHAR,
-        isadmin VARCHAR DEFAULT 'false'
+        isadmin VARCHAR
     )`;
   const parties = `CREATE TABLE IF NOT EXISTS 
     parties (
         id serial primary key,
-        name VARCHAR,
+        name VARCHAR UNIQUE,
         hqaddress VARCHAR,
         logourl VARCHAR
         )`;
@@ -27,14 +27,15 @@ const createtableusers = async () => {
     offices (
         id serial primary key,
         type VARCHAR,
-        name VARCHAR
+        name VARCHAR UNIQUE
         )`;
   const candidates = `CREATE TABLE IF NOT EXISTS 
     candidates (
-        id serial primary key,
+        id SERIAL,
         office INT,
         party INT,
-        candidate INT
+        candidate INT,
+        PRIMARY KEY(candidate, office)
         )`;
   const votes = `CREATE TABLE IF NOT EXISTS 
     votes (
@@ -54,16 +55,8 @@ const createtableusers = async () => {
         body VARCHAR
         )`;
 
-  await pool.query(users);
-  await pool.query(parties);
-  await pool.query(offices);
-  await pool.query(candidates);
-  await pool.query(votes);
-  await pool.query(petitions);
-  console.log('The tables are created');
-};
-
-
-createtableusers();
-
-export default createtableusers;
+  const promises = [users, parties, offices, candidates, votes, petitions].map(async query => {
+    await pool.query(query);
+  });
+  await Promise.all(promises);
+})();

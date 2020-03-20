@@ -31,33 +31,6 @@ describe('Testing the user', () => {
         done(error);
       });
   });
-  it('User should not be able to signup with a missing field', (done) => {
-    reader()
-      .post('/api/v1/auth/signup')
-      .send(user)
-      .end((error, res) => {
-        expect(res).to.have.status(201);
-        expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(201);
-        expect(res.body).to.have.property('message');
-        expect(res.body.message).to.be.a('string');
-        done(error);
-      });
-  });
-  it('user should be able to signup with all information required', (done) => {
-    reader()
-      .post('/api/v1/auth/signup')
-      .send(user)
-      .end((error, res) => {
-        expect(res).to.have.status(409);
-        console.log(`the status ${res}`);
-        expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(409);
-        expect(res.body).to.have.property('message');
-        expect(res.body.message).to.be.a('string');
-        done(error);
-      });
-  });
   it('user should not be able to signup with some missing field', (done) => {
     reader()
       .post('/api/v1/auth/signup')
@@ -115,9 +88,9 @@ describe('Testing the user', () => {
       .post('/api/v1/auth/signin')
       .send(users[8])
       .end((error, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(401);
+        expect(res.body.status).to.be.equal(404);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
