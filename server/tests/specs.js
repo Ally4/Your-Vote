@@ -122,8 +122,7 @@ describe('The testing for the token', () => {
       .set('Authorization', token)
       .send(office)
       .end((error, res) => {
-        expect(res).to.have.status(201
-          );
+        expect(res).to.have.status(201);
         expect(res.body).to.have.property('status');
         expect(res.body.status).to.be.equal(201);
         expect(res.body).to.have.property('message');

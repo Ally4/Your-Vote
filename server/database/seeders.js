@@ -50,8 +50,12 @@ dotenv.config();
         body
     ) VALUES (1, 1, 'Chef de bande')`;
 
-  const promises = [admin, user, party, office, candidate, vote, petition].map(async query => {
-    await pool.query(query);
-  });
-  await Promise.all(promises);
+  await pool.query(admin);
+  await pool.query(user);
+  await pool.query(party);
+  await pool.query(office);
+  await pool.query(candidate);
+  await pool.query(vote);
+  await pool.query(petition);
+
 })();
