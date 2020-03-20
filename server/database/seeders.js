@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
-import pool from './configuration';
+import pool from './config';
 
 dotenv.config();
 
-const insertData = async () => {
+
+(async () => {
   const admin = `INSERT INTO users (
         firstname ,
         lastname ,
@@ -13,7 +14,7 @@ const insertData = async () => {
         phonenumber ,
         passporturl ,
         isadmin
-    ) VALUES ('babalao', 'mamalao', 'maestro', 'maestro@gmail.com', 'abcd1234', '0784403223', 'www.passport.com', true )`;
+    ) VALUES ('babalao', 'mamalao', 'maestro', 'admin@gmail.com', '$2b$10$3xFArzqlAyGKXkD91H2S3Ot5Jgbskms705z/09aQEZp5i2lbU0ySG', '0784403223', 'www.passport.com', true )`;
   const user = `INSERT INTO users (
         firstname ,
         lastname ,
@@ -21,8 +22,9 @@ const insertData = async () => {
         email ,
         password ,
         phonenumber ,
-        passporturl
-    ) VALUES ('elmaestro', 'delmuzika', 'grandmaitre', 'el.ally741@gmail.com@gmail.com', 'abcd1234', '0784403223', 'www.passport.com' )`;
+        passporturl,
+        isadmin
+    ) VALUES ('elmaestro', 'delmuzika', 'grandmaitre', 'el.ally741@gmail.com', '$2b$10$3xFArzqlAyGKXkD91H2S3Ot5Jgbskms705z/09aQEZp5i2lbU0ySG', '0784403223', 'www.passport.com', null )`;
   const party = `INSERT INTO parties(
         name ,
         hqaddress ,
@@ -48,16 +50,8 @@ const insertData = async () => {
         body
     ) VALUES (1, 1, 'Chef de bande')`;
 
-  await pool.query(admin);
-  await pool.query(user);
-  await pool.query(party);
-  await pool.query(office);
-  await pool.query(candidate);
-  await pool.query(vote);
-  await pool.query(petition);
-  console.log('the insert was successfull');
-};
-
-insertData();
-
-export default insertData;
+  const promises = [admin, user, party, office, candidate, vote, petition].map(async query => {
+    await pool.query(query);
+  });
+  await Promise.all(promises);
+})();

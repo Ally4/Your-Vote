@@ -5,13 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "create": "babel-node server/database/createTableUsers.js",
-    "delete": "babel-node server/database/deleteTables.js",
-    "insert": "babel-node server/database/insertData.js",
-    "begin": "npm run delete && npm run create && npm run insert ",
-    "dev": "npm run begin && nodemon app.js ",
+    "dev": "npm run reset && nodemon app.js ",
+    "migrate:up": "babel-node server/database/migrateUp.js",
+    "migrate:down": "babel-node server/database/migrateDown.js",
+    "seed": "babel-node server/database/seeders.js",
+    "reset": "npm run migrate:down && npm run migrate:up && npm run seed ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test": "npm run begin && nyc --reporter-html --report=text mocha --require @babel/register ./server/tests/*js --timeout 1000000000000 --exit"
+    "test": "npm run reset && nyc --reporter-html --report=text mocha --require @babel/register ./server/tests/*js --timeout 1000000000000 --exit"
   },
   "nyc": {
     "exclude": "server/tests/*.js"
