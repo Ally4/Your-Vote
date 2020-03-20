@@ -25,7 +25,8 @@ This application is going to help the citizen to vote for their own leaders with
 -------------------------------------------------
 [Heroku](https://vote4you.herokuapp.com/)
 
-## DOCUMENTATION
+
+## Documentation
 -------------------------------------------------
 https://documenter.getpostman.com/view/7168800/SzS7PkcD?version=latest
 
@@ -44,13 +45,13 @@ https://documenter.getpostman.com/view/7168800/SzS7PkcD?version=latest
 |GET                |  `/api/v1/parties/:partyid`     |Admin, user or politician should be able to get a political party by id                      |
 |GET                |  `/api/v1/offices/:officeid`    |Admin, user or politician should be able to get a political office by id                     |
 |GET                |  `/api/v1/parties`              |Admin, user or politician should be able to get all registered political parties             |
-|GET                |  `/api/v1/offices`              |Admin, user or politician should be able to get all registered political offices            | |POST               |  `/api/v1/candidates`           |Admin should be able to create a candidate                                                   |
+|GET                |  `/api/v1/offices`              |Admin, user or politician should be able to get all registered political offices             |               |  `/api/v1/candidates`           |Admin should be able to create a candidate                                                   |
 |DELETE             |  `/api/v1/parties/:partyid`     |Admin should be able to delete a political party                                             |
-|POST               |  `/api/v1/vote`                 |Admin should be able to delete a political party                                             |
-|DELETE             |  `/api/v1/petitions/:petitionid`|Admin should be able to delete a political party                                             |
-|DELETE             |  `/api/v1/offices/:officeid`    |Admin should be able to delete a political party                                             |
-|GET                |  `/api/v1/office/:id/result`    |Admin should be able to delete a political party                                             |
-|GET                |  `/api/v1/office/results`       |Admin should be able to delete a political party                                             |
+|POST               |  `/api/v1/vote`                 |Admin should be able to Vote                                                                 |
+|DELETE             |  `/api/v1/petitions/:petitionid`|Admin should be able to delete a petition                                                    |
+|DELETE             |  `/api/v1/offices/:officeid`    |Admin should be able to delete an office                                                     |
+|GET                |  `/api/v1/office/:id/result`    |Admin should be able to get the result by id                                                 |
+|GET                |  `/api/v1/office/results`       |Admin should be able to result                                                               |
 
 ## Setting up the system
 ### Prerequisites
