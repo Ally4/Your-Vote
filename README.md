@@ -22,6 +22,10 @@ This application is going to help the citizen to vote for their own leaders with
 -------------------------------------------------
 [Heroku](https://vote4you.herokuapp.com/)
 
+## Documentation
+-------------------------------------------------
+https://documenter.getpostman.com/view/7168800/SzS7PkcD?version=latest
+
 
 ## The endpoints
 
